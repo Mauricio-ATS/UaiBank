@@ -115,6 +115,12 @@ void insert_user(int qtd) {
             &usuarios[i].idade,
             &usuarios[i].saldo);
         
+        if (usuarios[i].idade <= 0 || usuarios[i].saldo < 0) {
+            printf("Erro: informações inseridas invalidas, cancelando operação\n");
+            free(usuarios);
+            return;
+        }
+        
         id++;
     }
 
@@ -214,7 +220,7 @@ int main() {
         printf("5 → Remover usuário       \n");
         printf("6 → Sair                  \n");
         printf("═══════════════════════════\n");
-    while (exec != 0){
+    while (exec != 6){
         scanf("%d", &exec);
         int id, qtd, id_origem, id_destino;
         float valor;
@@ -249,6 +255,8 @@ int main() {
                 scanf("%d", &id);
                 remove_user(id);
                 break;
+            case 6:
+                return 0;
             default:
                 break;
         }
